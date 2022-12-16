@@ -1,4 +1,4 @@
-import _ from '@lodash';
+import _ from '~/@lodash';
 
 class YbookUtils {
     static setRoutes(config: any) {

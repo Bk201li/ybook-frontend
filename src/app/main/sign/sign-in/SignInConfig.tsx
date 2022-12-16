@@ -2,7 +2,7 @@ import { lazy } from 'react';
 
 const SignIn = lazy(() => import('./SignIn'));
 
-const CustomersConfig = {
+const SignInConfig = {
   routes: [
     {
       path: 'signin',
@@ -11,4 +11,4 @@ const CustomersConfig = {
   ],
 };
 
-export default CustomersConfig;
+export default SignInConfig;

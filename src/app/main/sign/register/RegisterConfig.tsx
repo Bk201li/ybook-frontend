@@ -2,7 +2,7 @@ import { lazy } from 'react';
 
 const Register = lazy(() => import('./Register'));
 
-const CustomersConfig = {
+const RegisterConfig = {
   routes: [
     {
       path: 'register',
@@ -11,4 +11,4 @@ const CustomersConfig = {
   ],
 };
 
-export default CustomersConfig;
+export default RegisterConfig;

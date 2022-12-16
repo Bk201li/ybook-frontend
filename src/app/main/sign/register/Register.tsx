@@ -1,3 +1,5 @@
-export const Register = () => {
-  return 'register';
+const Register = () => {
+  return (<div>Register</div>);
 };
+
+export default Register;
