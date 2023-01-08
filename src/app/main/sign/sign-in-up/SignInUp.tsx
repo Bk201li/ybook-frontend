@@ -17,25 +17,10 @@ import {
   AuthenticationDetails,
 } from 'amazon-cognito-identity-js';
 import userPool from '~/app/configs/cognitoAuth';
-import { userLoggedIn, userInfos, cognitoUserAtom } from '~/store/atoms/userInfos';
+import { userLoggedIn, userInfos, cognitoUserAtom } from '~/app/store/atoms/userInfos';
 import { useAtom } from 'jotai';
 import SignUpConfirmation from '../sign-up-confirmation/SignUpConfirmation';
-
-function Copyright(props: any) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link
-        color="inherit"
-        href="https://www.ynov.com/formation/ynov-masteres/expert-developpement-web/"
-      >
-        Ybook
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import Copyright from '~/app/shared-components/Copyright/Copyright';
 
 const theme = createTheme();
 
@@ -56,47 +41,6 @@ const SignInUp: React.FC = () => {
       register(event);
       setIsConfirmationNeeded(true);
     }
-
-    // const data = new FormData(event.currentTarget);
-    // const userAttributes = [];
-    // const email = {
-    //   Name: 'email',
-    //   Value: data.get('email') as string,
-    // };
-    // const password = {
-    //   Name: 'password',
-    //   Value: data.get('password') as string,
-    // };
-    // const firstName = {
-    //   Name: 'given_name',
-    //   Value: data.get('firstName') as string,
-    // };
-    // const lastName = {
-    //   Name: 'name',
-    //   Value: data.get('lastName') as string,
-    // };
-    // const attributeEmail = new CognitoUserAttribute(email);
-    // const attributeFirstName = new CognitoUserAttribute(firstName);
-    // const attributeLastName = new CognitoUserAttribute(lastName);
-    // userAttributes.push(attributeFirstName);
-    // userAttributes.push(attributeLastName);
-    // userAttributes.push(attributeEmail);
-    // setEmail(email.Value);
-    // userPool.signUp(
-    //   email.Value,
-    //   password.Value,
-    //   userAttributes,
-    //   userAttributes,
-    //   function (err, result) {
-    //     if (err) {
-    //       alert(err.message || JSON.stringify(err));
-    //       return;
-    //     }
-    //     const cognitoUser = result?.user;
-    //     console.log('user name is ' + cognitoUser?.getUsername());
-    //     setIsConfirmationNeeded(true);
-    //   }
-    // );
   };
 
   const login = (event: React.FormEvent<HTMLFormElement>) => {
