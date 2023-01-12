@@ -1,5 +1,6 @@
 #root {
   max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -39,3 +40,11 @@
 .read-the-docs {
   color: #888;
 }
+
+.search_icon {
+  position: absolute;
+  fill: #377DF6 !important;
+  margin-left: 10px;
+
+}
+
