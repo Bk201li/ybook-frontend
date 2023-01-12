@@ -42,10 +42,10 @@ export default function BottomAppBar() {
       <AppBar position="fixed" sx={{ top: "auto", bottom: 0 }}>
         <Toolbar className="flex justify-between" sx={{ py: 1 }}>
           <div className="flex w-full justify-around items-center">
-            <IconButton className="" aria-label="open drawer">
+            <IconButton href="/home" className="" aria-label="open drawer">
               <HomeIcon className="text-white" />
             </IconButton>
-            <IconButton className="" aria-label="open drawer">
+            <IconButton href="/friends" className="" aria-label="open drawer">
               <GroupIcon className="text-white" />
             </IconButton>
          
@@ -53,9 +53,10 @@ export default function BottomAppBar() {
             <AddIcon className="" sx={{ width: "40px", height: "40px", padding: "6px", background: "white", borderRadius: "50px", fill:"#3773C9" }} />
 
 
-            <IconButton color="inherit">
+            <IconButton href="/messages" color="inherit">
               <CommentIcon className="text-white" />
             </IconButton>
+
             <IconButton color="inherit">
               <SettingsIcon className="text-white" />
             </IconButton>

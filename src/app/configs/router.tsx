@@ -7,9 +7,10 @@ import SignOutConfig from "~/app/main/sign/sign-out/SignOutConfig";
 import SignUp from "~/app/main/sign/sign-up/SignUpConfig";
 import Home from "~/app/main/home/HomeConfig";
 import Friends from "~/app/main/friends/FriendsConfig";
+import MessagesList from "~/app/main/messages/MessagesListConfig";
 
 
-const routeConfigs = [SignInConfig, SignOutConfig, SignUp, Home, Friends];
+const routeConfigs = [SignInConfig, SignOutConfig, SignUp, Home, Friends, MessagesList];
 
 export const router = createBrowserRouter([
   ...YbookUtils.generateRoutesFromConfigs(routeConfigs),
