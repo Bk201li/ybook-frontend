@@ -59,7 +59,8 @@ const Home: React.FunctionComponent<HomeProps> = () => {
               avatar={<Avatar alt="Profile Picture" src={avatar} />}
               name={name}
             />
-            <CardContent content={content} />
+            {/* <CardContent content={content} >
+            </CardContent> */}
             <CardActions>
               <ThumbUpIcon />
               <EmailIcon />
