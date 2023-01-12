@@ -3,11 +3,9 @@ import { CognitoUser } from "amazon-cognito-identity-js";
 
 // user informations atom
 const userInfos = atom({
-    id: '',
-    name: '',
     email: '',
-    avatar: '',
-    token: '',
+    firstName: '',
+    lastName: '',
 });
 
 const cognitoUserAtom = atom<CognitoUser | null>(null);

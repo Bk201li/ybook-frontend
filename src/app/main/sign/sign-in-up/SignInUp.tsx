@@ -55,31 +55,31 @@ const SignInUp: React.FC = () => {
       Pool: userPool,
     };
     const cognitoUser = new CognitoUser(userData);
-    cognitoUser.authenticateUser(authenticationDetails, {
-      onSuccess: function (result) {
-        const JWTToken = result.getAccessToken().getJwtToken();
-        cognitoUser.getUserAttributes(function (err, result) {
-          if (err) {
-            alert(err.message || JSON.stringify(err));
-            return;
-          } else if (result) {
-            const user = {
-              id: result[0].Value,
-              email: result[4].Value,
-              name: result[2].Value + ' ' + result[3].Value,
-              avatar: '',
-              token: JWTToken,
-            };
-            setUserInfos(user);
-            setCognitoUser(cognitoUser);
-          }
-        });
-        setLoggedIn(true);
-      },
-      onFailure: function (err) {
-        alert(err.message || JSON.stringify(err));
-      },
-    });
+    // cognitoUser.authenticateUser(authenticationDetails, {
+    //   onSuccess: function (result) {
+    //     const JWTToken = result.getAccessToken().getJwtToken();
+    //     cognitoUser.getUserAttributes(function (err, result) {
+    //       if (err) {
+    //         alert(err.message || JSON.stringify(err));
+    //         return;
+    //       } else if (result) {
+    //         const user = {
+    //           id: result[0].Value,
+    //           email: result[4].Value,
+    //           name: result[2].Value + ' ' + result[3].Value,
+    //           avatar: '',
+    //           token: JWTToken,
+    //         };
+    //         setUserInfos(user);
+    //         setCognitoUser(cognitoUser);
+    //       }
+    //     });
+    //     setLoggedIn(true);
+    //   },
+    //   onFailure: function (err) {
+    //     alert(err.message || JSON.stringify(err));
+    //   },
+    // });
   };
 
   const register = (event: React.FormEvent<HTMLFormElement>) => {
@@ -119,6 +119,12 @@ const SignInUp: React.FC = () => {
           return;
         }
         const cognitoUser = result?.user;
+        const user = {
+          email: email.Value,
+          firstName: firstName.Value,
+          lastName: lastName.Value,
+        };
+        setUserInfos(user);
         console.log('user name is ' + cognitoUser?.getUsername());
       }
     );

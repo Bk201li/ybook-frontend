@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,6 +12,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import Copyright from '~/app/shared-components/Copyright/Copyright';
+import { useAtom } from 'jotai';
+import { userInfos } from '~/app/store/atoms/userInfos';
+import { createUser } from '~/app/store/api/users';
 
 interface Props {
   userPool: CognitoUserPool;
@@ -31,13 +35,33 @@ const SignUpConfirmation: React.FC<Props> = ({
     Username: email,
     Pool: userPool,
   };
+  const [user] = useAtom(userInfos);
   const cognitoUser = new CognitoUser(userData);
   const [confirmationCode, setConfirmationCode] = React.useState('');
+  const queryClient = useQueryClient();
+  const { status, error, mutate } = useMutation({
+    mutationFn: createUser,
+    onSuccess: (newUser) => {
+      queryClient.setQueryData(['users'], newUser);
+    },
+  });
 
   const handleConfirm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const confirmationCode = data.get('confirmationCode') as string;
+    const email = {
+      Name: 'email',
+      Value: data.get('email') as string,
+    };
+    const firstName = {
+      Name: 'given_name',
+      Value: data.get('firstName') as string,
+    };
+    const lastName = {
+      Name: 'name',
+      Value: data.get('lastName') as string,
+    };
     cognitoUser.confirmRegistration(confirmationCode, true, (err, result) => {
       if (err) {
         console.log(err);
@@ -46,6 +70,7 @@ const SignUpConfirmation: React.FC<Props> = ({
       console.log(result);
       registeredSetter(true);
       setNeedConfirmation(false);
+      mutate({ email: email.Value, firstName: firstName.Value, lastName: lastName.Value });
     });
   };
 
