@@ -1,17 +1,18 @@
 import { createBrowserRouter } from 'react-router-dom';
-import App from '~/App';
-
+import { lazy } from 'react';
 import YbookUtils from '~/@ybook/utils';
-import SignInConfig from '~/app/main/sign/sign-in/SignInConfig';
+import SignInUpConfig from '~/app/main/sign/sign-in-up/SignInUpConfig';
 import SignOutConfig from '~/app/main/sign/sign-out/SignOutConfig';
-import SignUp from '~/app/main/sign/sign-up/SignUpConfig';
+import FriendsConfig from "~/app/main/friends/FriendsConfig";
 
-const routeConfigs = [SignInConfig, SignOutConfig, SignUp];
+const Home = lazy(() => import('../main/home/Home'));
+
+const routeConfigs = [SignInUpConfig, SignOutConfig, FriendsConfig];
 
 export const router = createBrowserRouter([
   ...YbookUtils.generateRoutesFromConfigs(routeConfigs),
   {
     path: '/',
-    element: <App />,
+    element: <Home />,
   },
 ]);
