@@ -3,10 +3,11 @@ import { lazy } from 'react';
 import YbookUtils from '~/@ybook/utils';
 import SignInUpConfig from '~/app/main/sign/sign-in-up/SignInUpConfig';
 import SignOutConfig from '~/app/main/sign/sign-out/SignOutConfig';
+import FriendsConfig from "~/app/main/friends/FriendsConfig";
 
 const Home = lazy(() => import('../main/home/Home'));
 
-const routeConfigs = [SignInUpConfig, SignOutConfig];
+const routeConfigs = [SignInUpConfig, SignOutConfig, FriendsConfig];
 
 export const router = createBrowserRouter([
   ...YbookUtils.generateRoutesFromConfigs(routeConfigs),

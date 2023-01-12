@@ -40,25 +40,24 @@ export default function BottomAppBar() {
     <React.Fragment>
       <CssBaseline />
       <AppBar position="fixed" sx={{ top: "auto", bottom: 0 }}>
-        <Toolbar className="bg-gray-400 flex justify-between" sx={{ py: 1 }}>
-          <div>
-            <IconButton className="mx-20" aria-label="open drawer">
-              <HomeIcon className="text-black" />
+        <Toolbar className="flex justify-between" sx={{ py: 1 }}>
+          <div className="flex w-full justify-around items-center">
+            <IconButton className="" aria-label="open drawer">
+              <HomeIcon className="text-white" />
             </IconButton>
-            <IconButton className="mx-20" aria-label="open drawer">
-              <GroupIcon className="text-black" />
+            <IconButton className="" aria-label="open drawer">
+              <GroupIcon className="text-white" />
             </IconButton>
-          </div>
-          <StyledFab aria-label="add">
-            <AddIcon className="text-white" />
-          </StyledFab>
-          {/* <Box sx={{ flexGrow: 1 }} /> */}
-          <div>
+         
+
+            <AddIcon className="" sx={{ width: "40px", height: "40px", padding: "6px", background: "white", borderRadius: "50px", fill:"#3773C9" }} />
+
+
             <IconButton color="inherit">
-              <CommentIcon className="text-black" />
+              <CommentIcon className="text-white" />
             </IconButton>
             <IconButton color="inherit">
-              <SettingsIcon className="text-black" />
+              <SettingsIcon className="text-white" />
             </IconButton>
           </div>
         </Toolbar>

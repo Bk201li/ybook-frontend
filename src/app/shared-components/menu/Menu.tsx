@@ -11,7 +11,7 @@ export default function ButtonAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" sx={{ top: 0, bottom: "auto" }}>
-        <Toolbar className="flex justify-end bg-gray-400">
+        <Toolbar className="flex justify-end">
           <IconButton
             size="large"
             edge="start"
