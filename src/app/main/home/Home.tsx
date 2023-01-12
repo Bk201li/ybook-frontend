@@ -11,7 +11,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import EmailIcon from "@mui/icons-material/Email";
+import ModeCommentRoundedIcon from '@mui/icons-material/ModeCommentRounded';
 import ImageIcon from "@mui/icons-material/Image";
 import CardHeader from "@mui/material/CardHeader";
 import Avatar from "@mui/material/Avatar";
@@ -80,11 +80,12 @@ const Home: React.FunctionComponent<HomeProps> = () => {
           <React.Fragment key={id}>
             <CardHeader
               avatar={<Avatar alt="profil" src={avatar} />}
-              titleTypographyProps={{ variant: "h6" }}
+              titleTypographyProps={{ variant: "h6", display: "flex", justifyContent: "start" }}
               title={name}
+              sx={{pb: "10px"}}
             />
-            <CardContent>
-              <Typography variant="body2">{content}</Typography>
+            <CardContent sx={{pt: "1px"}}>
+              <Typography variant="body2" align="left">{content}</Typography>
             </CardContent>
             <CardMedia
               component="img"
@@ -92,10 +93,9 @@ const Home: React.FunctionComponent<HomeProps> = () => {
               alt="User Media"
               sx={{ objectFit: "contain", borderRadius: "15px" }}
             />
-            <CardActions className="flex justify-around">
-              <ThumbUpIcon sx={{ width: "20px" }} />
-              <ImageIcon sx={{ width: "20px" }} />
-              <EmailIcon sx={{ width: "20px" }} />
+            <CardActions className="flex justify-left">
+              <ThumbUpIcon sx={{ width: "30px", pr: "10px" }} />
+              <ModeCommentRoundedIcon sx={{ width: "30px", pl: "10px" }} />
             </CardActions>
           </React.Fragment>
         </Card>

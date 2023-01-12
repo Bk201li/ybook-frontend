@@ -21,7 +21,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 
 import HomeIcon from "@mui/icons-material/Home";
 import GroupIcon from "@mui/icons-material/Group";
-import CommentIcon from "@mui/icons-material/Comment";
+import ForumRoundedIcon from '@mui/icons-material/ForumRounded';
 import SettingsIcon from "@mui/icons-material/Settings";
 import { color } from "@mui/system";
 
@@ -55,7 +55,7 @@ export default function BottomAppBar() {
           {/* <Box sx={{ flexGrow: 1 }} /> */}
           <div>
             <IconButton color="inherit">
-              <CommentIcon className="text-black" />
+              <ForumRoundedIcon className="text-black" />
             </IconButton>
             <IconButton color="inherit">
               <SettingsIcon className="text-black" />
