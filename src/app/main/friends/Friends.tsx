@@ -157,7 +157,7 @@ const Friends: React.FunctionComponent<FriendsProps> = () => {
 
                 <div className="flex items-center mb-3">
                     <CustomInput className="w-full" aria-label="Demo input" placeholder="Search" />
-                    <SearchIcon className="search_icon"></SearchIcon>
+                    <SearchIcon className="search_icon" sx={{ position: "absolute", fill: "#377DF6 !important", marginLeft: "10px" }}></SearchIcon>
                 </div>
                 <TabsList>
                     <Tab>Mes amis</Tab>
