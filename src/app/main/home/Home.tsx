@@ -46,7 +46,7 @@ const Home: React.FunctionComponent<HomeProps> = () => {
   return (
     <>
       <Menu />
-      <Card sx={{ maxWidth: 345, boxShadow: "0px 5px 10px" }}>
+      {/* <Card sx={{ maxWidth: 345, boxShadow: "0px 5px 10px" }}>
         {posts.map(({ id, name, content, avatar }) => (
           <React.Fragment key={id}>
             <CardMedia
@@ -59,15 +59,15 @@ const Home: React.FunctionComponent<HomeProps> = () => {
               avatar={<Avatar alt="Profile Picture" src={avatar} />}
               name={name}
             />
-            {/* <CardContent content={content} >
-            </CardContent> */}
+            <CardContent content={content} >
+            </CardContent>
             <CardActions>
               <ThumbUpIcon />
               <EmailIcon />
             </CardActions>
           </React.Fragment>
         ))}
-      </Card>
+      </Card> */}
       <NavBar />
     </>
   );
