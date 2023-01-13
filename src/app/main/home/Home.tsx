@@ -1,9 +1,6 @@
 import React from "react";
 import NavBar from "../../shared-components/navbar/NavBar";
 import Menu from "../../shared-components/menu/Menu";
-import Box from "@mui/material/Box";
-import { relative } from "path";
-
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
