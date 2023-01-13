@@ -42,7 +42,7 @@ export default function BottomAppBar() {
       <AppBar position="fixed" sx={{ top: "auto", bottom: 0 }}>
         <Toolbar className="flex justify-between" sx={{ py: 1 }}>
           <div className="flex w-full justify-around items-center">
-            <IconButton href="/home" className="" aria-label="open drawer">
+            <IconButton href="/" className="" aria-label="open drawer">
               <HomeIcon className="text-white" />
             </IconButton>
             <IconButton href="/friends" className="" aria-label="open drawer">
