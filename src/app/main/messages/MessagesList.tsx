@@ -121,7 +121,7 @@ const Friends: React.FunctionComponent<FriendsProps> = () => {
 
       <div className="flex items-center mb-8">
         <CustomInput className="w-full" aria-label="Demo input" placeholder="Search" />
-        <SearchIcon className="search_icon"></SearchIcon>
+        <SearchIcon className="search_icon" sx={{ position: "absolute", fill: "#377DF6 !important", marginLeft: "10px" }}></SearchIcon>
       </div>
 
       <div className="flex flex-col items-center justify-between">
@@ -132,7 +132,7 @@ const Friends: React.FunctionComponent<FriendsProps> = () => {
             <img className="w-10 h-10 rounded-full" src="https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc=" alt="" />
             <div className="flex flex-col items-start ml-3">
               <p className="font-bold">{ message.sender }</p>
-              <p>{ message.content }</p>
+              <p className="text-left">{ message.content }</p>
             </div>
           </div>
         ))
