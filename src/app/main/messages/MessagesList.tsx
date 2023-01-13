@@ -1,6 +1,6 @@
-import React from "react";
-import NavBar from "../../shared-components/navbar/NavBar";
-import Menu from "../../shared-components/menu/Menu";
+import React from 'react';
+import NavBar from '../../shared-components/navbar/NavBar';
+import Menu from '../../shared-components/menu/Menu';
 import { styled } from '@mui/system';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import DoNotDisturbOnRoundedIcon from '@mui/icons-material/DoNotDisturbOnRounded';
@@ -8,8 +8,7 @@ import { red } from '@mui/material/colors';
 import InputUnstyled from '@mui/base/InputUnstyled';
 import SearchIcon from '@mui/icons-material/Search';
 
-
-interface FriendsProps { }
+interface FriendsProps {}
 
 type MessageType = {
   sender: string;
@@ -18,39 +17,38 @@ type MessageType = {
 
 const messages: MessageType[] = [
   {
-    "sender": "Alex",
-    "content": " PeterPeterPeterPeterPeter PeterPeter"
+    sender: 'Alex',
+    content: ' PeterPeterPeterPeterPeter PeterPeter',
   },
   {
-    "sender": "Joe",
-    "content": "PeterPeterPeter PeterPeter PeterPeter"
+    sender: 'Joe',
+    content: 'PeterPeterPeter PeterPeter PeterPeter',
   },
   {
-    "sender": "Joe",
-    "content": "PeterPeterPeter PeterPeter PeterPeter"
+    sender: 'Joe',
+    content: 'PeterPeterPeter PeterPeter PeterPeter',
   },
   {
-    "sender": "Joe",
-    "content": "PeterPeterPeter PeterPeter PeterPeter"
+    sender: 'Joe',
+    content: 'PeterPeterPeter PeterPeter PeterPeter',
   },
   {
-    "sender": "Joe",
-    "content": "PeterPeterPeter PeterPeter PeterPeter"
+    sender: 'Joe',
+    content: 'PeterPeterPeter PeterPeter PeterPeter',
   },
   {
-    "sender": "Joe",
-    "content": "PeterPeterPeter PeterPeter PeterPeter"
+    sender: 'Joe',
+    content: 'PeterPeterPeter PeterPeter PeterPeter',
   },
   {
-    "sender": "Joe",
-    "content": "PeterPeterPeter PeterPeter PeterPeter"
+    sender: 'Joe',
+    content: 'PeterPeterPeter PeterPeter PeterPeter',
   },
   {
-    "sender": "Joe",
-    "content": "PeterPeterPeter PeterPeter PeterPeter"
-  }
+    sender: 'Joe',
+    content: 'PeterPeterPeter PeterPeter PeterPeter',
+  },
 ];
-
 
 const StyledInputElement = styled('input')(
   ({ theme }) => `
@@ -74,7 +72,7 @@ const StyledInputElement = styled('input')(
       border-color: ${blue[400]};
       outline: 3px solid ${theme.palette.mode === 'dark' ? blue[500] : blue[200]};
     }
-  `,
+  `
 );
 
 const blue = {
@@ -105,40 +103,36 @@ const grey = {
 
 const CustomInput = React.forwardRef(function CustomInput(
   props: React.InputHTMLAttributes<HTMLInputElement>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+  ref: React.ForwardedRef<HTMLDivElement>
 ) {
-  return (
-    <InputUnstyled slots={{ input: StyledInputElement }} {...props} ref={ref} />
-  );
+  return <InputUnstyled slots={{ input: StyledInputElement }} {...props} ref={ref} />;
 });
 
-
 const Friends: React.FunctionComponent<FriendsProps> = () => {
-
   return (
     <>
-      <Menu />
-
       <div className="flex items-center mb-8">
         <CustomInput className="w-full" aria-label="Demo input" placeholder="Search" />
-        <SearchIcon className="search_icon" sx={{ position: "absolute", fill: "#377DF6 !important", marginLeft: "10px" }}></SearchIcon>
+        <SearchIcon
+          className="search_icon"
+          sx={{ position: 'absolute', fill: '#377DF6 !important', marginLeft: '10px' }}
+        ></SearchIcon>
       </div>
 
       <div className="flex flex-col items-center justify-between">
-
-        {
-        messages.map((message, key) => (
+        {messages.map((message, key) => (
           <div className="flex items-center p-2.5 rounded-lg shadow	w-full  mb-4">
-            <img className="w-10 h-10 rounded-full" src="https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc=" alt="" />
+            <img
+              className="w-10 h-10 rounded-full"
+              src="https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc="
+              alt=""
+            />
             <div className="flex flex-col items-start ml-3">
-              <p className="font-bold">{ message.sender }</p>
-              <p className="text-left">{ message.content }</p>
+              <p className="font-bold">{message.sender}</p>
+              <p className="text-left">{message.content}</p>
             </div>
           </div>
-        ))
-        }
-
-
+        ))}
       </div>
 
       <NavBar />
