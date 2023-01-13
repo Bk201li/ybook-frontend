@@ -56,7 +56,6 @@ const posts = [
 const Home: React.FunctionComponent<HomeProps> = () => {
   return (
     <>
-      <Menu />
       {posts.map(({ id, name, content, avatar, media }) => (
         <Card
           sx={{
@@ -94,7 +93,6 @@ const Home: React.FunctionComponent<HomeProps> = () => {
           </React.Fragment>
         </Card>
       ))}
-      <NavBar />
     </>
   );
 };
