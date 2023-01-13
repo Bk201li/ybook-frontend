@@ -95,11 +95,11 @@ const SignInUp: React.FC = () => {
     };
     const firstName = {
       Name: 'given_name',
-      Value: data.get('firstName') as string,
+      Value: data.get('firstname') as string,
     };
     const lastName = {
       Name: 'name',
-      Value: data.get('lastName') as string,
+      Value: data.get('lastname') as string,
     };
     const attributeEmail = new CognitoUserAttribute(email);
     const attributeFirstName = new CognitoUserAttribute(firstName);
@@ -121,8 +121,8 @@ const SignInUp: React.FC = () => {
         const cognitoUser = result?.user;
         const user = {
           email: email.Value,
-          firstName: firstName.Value,
-          lastName: lastName.Value,
+          firstname: firstName.Value,
+          lastname: lastName.Value,
         };
         setUserInfos(user);
         console.log('user name is ' + cognitoUser?.getUsername());
@@ -162,10 +162,10 @@ const SignInUp: React.FC = () => {
                   <Grid item xs={12} sm={6}>
                     <TextField
                       autoComplete="given-name"
-                      name="firstName"
+                      name="firstname"
                       required
                       fullWidth
-                      id="firstName"
+                      id="firstname"
                       label="Prénom"
                       autoFocus
                     />
@@ -174,9 +174,9 @@ const SignInUp: React.FC = () => {
                     <TextField
                       required
                       fullWidth
-                      id="lastName"
+                      id="lastname"
                       label="Nom"
-                      name="lastName"
+                      name="lastname"
                       autoComplete="family-name"
                     />
                   </Grid>

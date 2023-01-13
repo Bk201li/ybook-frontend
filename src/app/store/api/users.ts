@@ -7,14 +7,14 @@ export function getUsers() {
 
 export function createUser({
   email,
-  firstName,
-  lastName,
+  firstname,
+  lastname,
 }: {
   email: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
 }) {
   return axios
-    .post<IUser[]>('http://localhost:3000/users/signup', { email, firstName, lastName })
+    .post<IUser[]>('http://localhost:3000/users/signup', { email, firstname, lastname })
     .then((res) => res.data);
 }
