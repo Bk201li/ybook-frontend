@@ -72,8 +72,8 @@ const Sign: React.FC = () => {
             const user = {
               id: result[0].Value,
               email: result[4].Value,
-              firstname: result[2].Value,
-              lastname: result[3].Value,
+              firstname: result[3].Value,
+              lastname: result[2].Value,
               avatar: '',
               token: JWTToken,
             };
