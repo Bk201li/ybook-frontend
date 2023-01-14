@@ -54,7 +54,7 @@ const Sign: React.FC = () => {
       Username: data.get('email') as string,
       Password: data.get('password') as string,
     };
-    console.log('herezrezr');
+
     var authenticationDetails = new AuthenticationDetails(authData);
     const userData = {
       Username: data.get('email') as string,
@@ -63,18 +63,12 @@ const Sign: React.FC = () => {
     const cognitoUser = new CognitoUser(userData);
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: function (result) {
-        console.log('result1:', result);
         const JWTToken = result.getAccessToken().getJwtToken();
         cognitoUser.getUserAttributes(function (err, result) {
-          console.log('result:', result);
           if (err) {
-            console.log('err:', err);
-            console.log('result2:', result);
-
             alert(err.message || JSON.stringify(err));
             return;
           } else if (result) {
-            console.log('result:', result);
             const user = {
               id: result[0].Value,
               email: result[4].Value,
@@ -104,7 +98,7 @@ const Sign: React.FC = () => {
     };
     const password = {
       Name: 'password',
-      Value: data.get('password') as string,
+      Value: data.get('confirmPassword') as string,
     };
     const firstName = {
       Name: 'given_name',
@@ -209,11 +203,11 @@ const Sign: React.FC = () => {
                 <TextField
                   required
                   fullWidth
-                  name="first_password"
+                  name="password"
                   label="Mot de passe"
                   type="password"
                   id="password"
-                  autoComplete="first-password"
+                  autoComplete="password"
                 />
               </Grid>
               {!isRegistered && (
@@ -221,11 +215,11 @@ const Sign: React.FC = () => {
                   <TextField
                     required
                     fullWidth
-                    name="password"
+                    name="confirmPassword"
                     label="Confirmer votre mot de passe"
                     type="password"
-                    id="password2"
-                    autoComplete="new-password"
+                    id="confirmPassword"
+                    autoComplete="confirmPassword"
                   />
                 </Grid>
               )}
