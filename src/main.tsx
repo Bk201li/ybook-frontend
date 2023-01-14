@@ -1,25 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { RouterProvider } from 'react-router-dom';
 import './index.css';
 import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import Navbar from '~/app/shared-components/navbar/NavBar';
-import Menu from '~/app/shared-components/menu/Menu';
 
-import { router } from './app/configs/router';
+import Router from './router/Router';
 
 const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <QueryClientProvider client={queryClient}>
     <React.StrictMode>
-      <Menu />
-      <RouterProvider router={router} />
-      <Navbar />
+      <Router />
     </React.StrictMode>
     <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>
