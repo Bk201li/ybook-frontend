@@ -10,7 +10,9 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ModeCommentRoundedIcon from "@mui/icons-material/ModeCommentRounded";
 import CardHeader from "@mui/material/CardHeader";
 import Avatar from "@mui/material/Avatar";
-import { ListItem, ListItemAvatar } from "@mui/material";
+import IconButton from '@mui/material/IconButton';
+import { Box, ListItem, ListItemAvatar, ListItemText, TextField } from "@mui/material";
+import { AccountCircle } from "@mui/icons-material";
 
 interface HomeProps {}
 const posts = [
@@ -89,6 +91,25 @@ const posts = [
 ];
 
 const Home: React.FunctionComponent<HomeProps> = () => {
+
+  enum PostAction {
+    LIKE = "like",
+    COMMENT = "comment",
+  }
+
+  const [currentPostAction, setCurrentPostAction] = React.useState("");
+
+  const [isCommentOpen, setIsCommentOpen] = React.useState<null|number>(null);
+
+  function handleCommentOpen(postId: number) {
+    setIsCommentOpen((prevState) => {
+      if (prevState === postId) {
+        return null;
+      }
+      return postId;
+    });
+  }
+
   return (
     <>
       {posts.map(({ id, name, content, avatar, media, comments }) => (
@@ -128,17 +149,28 @@ const Home: React.FunctionComponent<HomeProps> = () => {
             sx={{ objectFit: "contain", borderRadius: "15px" }}
           />
           <CardActions className="flex justify-left">
-            <ThumbUpIcon sx={{ width: "30px", pr: "10px" }} />
-            <ModeCommentRoundedIcon sx={{ width: "30px", pl: "10px" }} />
+            <IconButton>
+              <ThumbUpIcon sx={{ width: "30px", pr: "10px" }} />
+            </IconButton>
+            <IconButton onClick={() => handleCommentOpen(id)}>
+             <ModeCommentRoundedIcon sx={{ width: "30px", pl: "10px" }} />
+            </IconButton>
           </CardActions>
-          {comments?.map(
-            ({ commentId, commentName, commentContent, commentAvatar }) => (
-              <ListItem key={commentId}>
-                <ListItemAvatar>
-                  <Avatar alt="profil" src={commentAvatar} />
-                </ListItemAvatar>
-              </ListItem>
-            )
+          {isCommentOpen === id && (<>
+            <Box sx={{ display: 'flex', alignItems: 'flex-end', borderTop:"solid 1px gray", pl:"15px", py:"10px" }}>
+              <Avatar alt="profil" src={avatar} />
+              <TextField sx={{pl:"15px"}} placeholder="Écrivez votre réponse" variant="standard" />
+            </Box>
+            {comments?.map(
+              ({ commentId, commentName, commentContent, commentAvatar }) => (
+                <ListItem key={commentId}>
+                  <ListItemAvatar>
+                    <Avatar alt="profil" src={commentAvatar} />
+                  </ListItemAvatar>
+                  <ListItemText primary={commentName} secondary={commentContent} />
+                </ListItem>
+              )
+            )}</>
           )}
         </Card>
       ))}
