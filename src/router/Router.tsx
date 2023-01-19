@@ -12,7 +12,7 @@ const Router: React.FC = () => {
 
   return (
     <BrowserRouter>
-      {loggedIn ? (
+      {!loggedIn ? (
         <>
           <Menu />
           <Routes>
