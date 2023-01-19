@@ -85,3 +85,7 @@ button:focus-visible {
 .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
   width: 84%;
 }
+
+.css-f779bt-MuiStack-root {
+  display: none !important;
+}
