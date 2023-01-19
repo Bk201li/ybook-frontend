@@ -7,4 +7,5 @@ export default interface IUser {
   email: string;
   avatarS3Key: string;
   coverPicS3Key: string;
+  config: string;
 }
