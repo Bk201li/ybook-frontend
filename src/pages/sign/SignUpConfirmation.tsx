@@ -14,7 +14,7 @@ import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import Copyright from '~/components/copyright/Copyright';
 import { useAtom } from 'jotai';
 import { userInfos } from '~/store/atoms/userInfos';
-import { createUser } from '~/store/api/users';
+import { createUser } from '~/store/api/services/users';
 
 interface Props {
   userPool: CognitoUserPool;

@@ -9,7 +9,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ModeCommentRoundedIcon from '@mui/icons-material/ModeCommentRounded';
 import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
-import { getPosts } from '~/store/api/posts';
+import { getPosts } from '~/store/api/services/posts';
 
 const Home: React.FC = () => {
   const postsQuery = useQuery({ queryKey: ['posts'], queryFn: getPosts });
