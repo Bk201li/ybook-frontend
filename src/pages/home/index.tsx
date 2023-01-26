@@ -97,8 +97,8 @@ const Home: React.FC = () => {
               sx={{ objectFit: 'contain', borderRadius: '15px' }}
             /> */}
               <CardActions className="flex justify-left">
-                <IconButton sx={{ outline: "0" }}>
-                  <ThumbUpIcon sx={{ width: "30px", ml: "10", border: "0" }} />
+                <IconButton>
+                  <ThumbUpIcon sx={{ width: "30px", ml: "10" }} />
                 </IconButton>
                 <IconButton
                   sx={{ outline: "0" }}
