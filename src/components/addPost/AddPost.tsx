@@ -6,6 +6,8 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { createPost } from '~/store/api/services/posts';
 import Button from '@mui/material/Button';
+import { snackBar } from '~/store/atoms/snackBar'
+import { useAtom } from 'jotai';
 
 interface Props {
   handleClose: any;
@@ -14,11 +16,12 @@ interface Props {
 
 const AddPost: React.FC<Props> = ({ handleClose, open }) => {
   const queryClient = useQueryClient();
-
+  const [, setSnackbar] = useAtom(snackBar);
   const postMutation = useMutation({
     mutationFn: createPost,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['posts'] });
+      setSnackbar({ isOpen: true });
     },
   });
 
