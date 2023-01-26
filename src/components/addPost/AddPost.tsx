@@ -4,7 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { createPost } from '~/store/api/posts';
+import { createPost } from '~/store/api/services/posts';
 import Button from '@mui/material/Button';
 import { snackBar } from '~/store/atoms/snackBar'
 import { useAtom } from 'jotai';
@@ -34,7 +34,7 @@ const AddPost: React.FC<Props> = ({ handleClose, open }) => {
       Value: data.get('htmlContent') as string,
     };
 
-    postMutation.mutate({ htmlContent: htmlContent.Value, userId: 1 });
+    postMutation.mutate({ htmlContent: htmlContent.Value });
     handleClose();
   };
 

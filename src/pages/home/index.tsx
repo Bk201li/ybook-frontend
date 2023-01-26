@@ -1,28 +1,21 @@
-import React from "react";
-import { useQuery } from "@tanstack/react-query";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ModeCommentRoundedIcon from "@mui/icons-material/ModeCommentRounded";
-import CardHeader from "@mui/material/CardHeader";
-import IconButton from "@mui/material/IconButton";
-import Avatar from "@mui/material/Avatar";
-import { getPosts } from "~/store/api/posts";
-import { snackBar } from "~/store/atoms/snackBar";
-import { useAtom } from "jotai";
-import {
-  Box,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  TextField,
-  Snackbar,
-} from "@mui/material";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { identity } from "lodash";
+import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ModeCommentRoundedIcon from '@mui/icons-material/ModeCommentRounded';
+import CardHeader from '@mui/material/CardHeader';
+import IconButton from '@mui/material/IconButton';
+import Avatar from '@mui/material/Avatar';
+import { getPosts } from '~/store/api/services/posts';
+import { snackBar } from '~/store/atoms/snackBar'
+import { useAtom } from 'jotai';
+import { Box, ListItem, ListItemAvatar, ListItemText, TextField, Snackbar } from '@mui/material';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import { identity } from 'lodash';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
