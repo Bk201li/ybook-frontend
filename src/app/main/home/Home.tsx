@@ -10,8 +10,14 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ModeCommentRoundedIcon from "@mui/icons-material/ModeCommentRounded";
 import CardHeader from "@mui/material/CardHeader";
 import Avatar from "@mui/material/Avatar";
-import IconButton from '@mui/material/IconButton';
-import { Box, ListItem, ListItemAvatar, ListItemText, TextField } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import {
+  Box,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  TextField,
+} from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 
 interface HomeProps {}
@@ -40,6 +46,12 @@ const posts = [
         commentId: 3,
         commentName: "Micka",
         commentContent: "Un vrai CHAD !",
+        commentAvatar: "",
+      },
+      {
+        commentId: 4,
+        commentName: "Lucas",
+        commentContent: "Eeeenncculé vaaaa",
         commentAvatar: "",
       },
     ],
@@ -91,7 +103,6 @@ const posts = [
 ];
 
 const Home: React.FunctionComponent<HomeProps> = () => {
-
   enum PostAction {
     LIKE = "like",
     COMMENT = "comment",
@@ -99,7 +110,9 @@ const Home: React.FunctionComponent<HomeProps> = () => {
 
   const [currentPostAction, setCurrentPostAction] = React.useState("");
 
-  const [isCommentOpen, setIsCommentOpen] = React.useState<null|number>(null);
+  const [isCommentOpen, setIsCommentOpen] = React.useState<null | number>(null);
+
+  const [showMore, setShowMore] = React.useState(false);
 
   function handleCommentOpen(postId: number) {
     setIsCommentOpen((prevState) => {
@@ -153,24 +166,46 @@ const Home: React.FunctionComponent<HomeProps> = () => {
               <ThumbUpIcon sx={{ width: "30px", pr: "10px" }} />
             </IconButton>
             <IconButton onClick={() => handleCommentOpen(id)}>
-             <ModeCommentRoundedIcon sx={{ width: "30px", pl: "10px" }} />
+              <ModeCommentRoundedIcon sx={{ width: "30px", pl: "10px" }} />
             </IconButton>
           </CardActions>
-          {isCommentOpen === id && (<>
-            <Box sx={{ display: 'flex', alignItems: 'flex-end', borderTop:"solid 1px gray", pl:"15px", py:"10px" }}>
-              <Avatar alt="profil" src={avatar} />
-              <TextField sx={{pl:"15px"}} placeholder="Écrivez votre réponse" variant="standard" />
-            </Box>
-            {comments?.map(
-              ({ commentId, commentName, commentContent, commentAvatar }) => (
-                <ListItem key={commentId}>
-                  <ListItemAvatar>
-                    <Avatar alt="profil" src={commentAvatar} />
-                  </ListItemAvatar>
-                  <ListItemText primary={commentName} secondary={commentContent} />
-                </ListItem>
-              )
-            )}</>
+          {isCommentOpen === id && (
+            <>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "flex-end",
+                  borderTop: "solid 1px gray",
+                  pl: "15px",
+                  py: "10px",
+                }}
+              >
+                <Avatar alt="profil" src={avatar} />
+                <TextField
+                  sx={{ pl: "15px" }}
+                  placeholder="Écrivez votre réponse"
+                  variant="standard"
+                />
+              </Box>
+              {comments?.map(
+                ({ commentId, commentName, commentContent, commentAvatar }) => (
+                  <ListItem key={commentId}>
+                    <ListItemAvatar>
+                      <Avatar alt="profil" src={commentAvatar} />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={commentName}
+                      secondary={commentContent}
+                    />
+                  </ListItem>
+                )
+              )}
+              {comments !== undefined && comments.length > 3 && (
+                <IconButton onClick={() => setShowMore(!showMore)}>
+                  {showMore ? "Afficher moins" : "Afficher plus"}
+                </IconButton>
+              )}
+            </>
           )}
         </Card>
       ))}
