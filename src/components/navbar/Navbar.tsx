@@ -61,7 +61,7 @@ const Navbar: React.FC = () => {
               <CommentIcon className="text-white" />
             </IconButton>
 
-            <IconButton color="inherit">
+            <IconButton href="/settings" color="inherit">
               <SettingsIcon className="text-white" />
             </IconButton>
           </div>
