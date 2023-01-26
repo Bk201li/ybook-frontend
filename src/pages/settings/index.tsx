@@ -3,7 +3,7 @@ import { styled } from '@mui/system';
 import InputUnstyled from '@mui/base/InputUnstyled';
 import SearchIcon from '@mui/icons-material/Search';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { editUser } from '~/store/api/users';
+import { editUser } from '~/store/api/services/users';
 import { useAtom } from 'jotai';
 import { userInfos } from '~/store/atoms/userInfos';
 import TextField from '@mui/material/TextField';

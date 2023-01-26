@@ -10,8 +10,8 @@ import ModeCommentRoundedIcon from '@mui/icons-material/ModeCommentRounded';
 import CardHeader from '@mui/material/CardHeader';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
-import { getPosts } from '~/store/api/posts';
-import { snackBar } from '~/store/atoms/snackBar';
+import { getPosts } from '~/store/api/services/posts';
+import { snackBar } from '~/store/atoms/snackBar'
 import { useAtom } from 'jotai';
 import { Box, ListItem, ListItemAvatar, ListItemText, TextField, Snackbar } from '@mui/material';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
