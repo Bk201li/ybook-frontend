@@ -8,24 +8,30 @@ import Typography from '@mui/material/Typography';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ModeCommentRoundedIcon from '@mui/icons-material/ModeCommentRounded';
 import CardHeader from '@mui/material/CardHeader';
+import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
 import { getPosts } from '~/store/api/services/posts';
 import { snackBar } from '~/store/atoms/snackBar'
 import { useAtom } from 'jotai';
-import Snackbar from '@mui/material/Snackbar';
+import { Box, ListItem, ListItemAvatar, ListItemText, TextField, Snackbar } from '@mui/material';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import { identity } from 'lodash';
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref,
-) {
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
+
+enum PostAction {
+  LIKE = 'like',
+  COMMENT = 'comment',
+}
 
 const Home: React.FC = () => {
   const postsQuery = useQuery({ queryKey: ['posts'], queryFn: getPosts });
   const [snackbar, setSnackbar] = useAtom(snackBar);
-  
+  const [currentPostAction, setCurrentPostAction] = React.useState('');
+  const [isCommentOpen, setIsCommentOpen] = React.useState<null | number>(null);
+  const [showMore, setShowMore] = React.useState(false);
 
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
@@ -35,12 +41,20 @@ const Home: React.FC = () => {
     setSnackbar({ isOpen: false });
   };
 
+  function handleCommentOpen(postId: number) {
+    setIsCommentOpen((prevState) => {
+      if (prevState === postId) {
+        return null;
+      }
+      return postId;
+    });
+  }
+
   return (
     <>
       {postsQuery.isSuccess &&
-        postsQuery.data.map(({ id, htmlContent, user }) => (
-          <>
-
+        postsQuery.data.map(({ id, htmlContent, postComments, user }) => (
+          <div key={id}>
             <Card
               sx={{
                 position: 'relative',
@@ -73,9 +87,47 @@ const Home: React.FC = () => {
               sx={{ objectFit: 'contain', borderRadius: '15px' }}
             /> */}
               <CardActions className="flex justify-left">
-                <ThumbUpIcon sx={{ width: '30px', pr: '10px' }} />
-                <ModeCommentRoundedIcon sx={{ width: '30px', pl: '10px' }} />
+                <IconButton>
+                  <ThumbUpIcon sx={{ width: '30px', pr: '10px' }} />
+                </IconButton>
+                <IconButton onClick={() => handleCommentOpen(id)}>
+                  <ModeCommentRoundedIcon sx={{ width: '30px', pl: '10px' }} />
+                </IconButton>
               </CardActions>
+              {isCommentOpen === id && (
+                <>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'flex-end',
+                      borderTop: 'solid 1px gray',
+                      pl: '15px',
+                      py: '10px',
+                    }}
+                  >
+                    {/* <Avatar alt="profil" src={avatar} /> */}
+                    <TextField
+                      sx={{ pl: '15px' }}
+                      placeholder="Écrivez votre réponse"
+                      variant="standard"
+                    />
+                  </Box>
+                  {postComments?.map(({ id, user, text }) => (
+                    <ListItem key={id}>
+                      {/* <ListItemAvatar>
+                        <Avatar alt="profil" src={commentAvatar} />
+                      </ListItemAvatar> */}
+                      <ListItemText secondary={text} />
+                      {/* <ListItemText primary={user.firstname} secondary={text} /> */}
+                    </ListItem>
+                  ))}
+                  {postComments !== undefined && postComments.length > 3 && (
+                    <IconButton onClick={() => setShowMore(!showMore)}>
+                      {showMore ? 'Afficher moins' : 'Afficher plus'}
+                    </IconButton>
+                  )}
+                </>
+              )}
             </Card>
 
             <Snackbar open={snackbar.isOpen} autoHideDuration={6000} onClose={handleClose}>
@@ -83,8 +135,7 @@ const Home: React.FC = () => {
                 Votre post a bien été publié!
               </Alert>
             </Snackbar>
-          </>
-
+          </div>
         ))}
     </>
   );
