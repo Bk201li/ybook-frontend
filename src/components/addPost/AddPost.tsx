@@ -34,7 +34,7 @@ const AddPost: React.FC<Props> = ({ handleClose, open }) => {
       Value: data.get('htmlContent') as string,
     };
 
-    postMutation.mutate({ htmlContent: htmlContent.Value, userId: 1 });
+    postMutation.mutate({ htmlContent: htmlContent.Value });
     handleClose();
   };
 
