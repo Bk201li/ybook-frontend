@@ -18,3 +18,18 @@ export function createUser({
     .post<IUser[]>('http://localhost:3000/users/signup', { email, firstname, lastname })
     .then((res) => res.data);
 }
+
+
+export function editUser({
+  email,
+  firstname,
+  lastname,
+}: {
+  email: string;
+  firstname: string;
+  lastname: string;
+}) {
+  return axios
+    .post<IUser[]>('http://localhost:3000/users/', { email, firstname, lastname })
+    .then((res) => res.data);
+}
