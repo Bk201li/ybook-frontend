@@ -54,7 +54,7 @@ const Home: React.FC = () => {
     <>
       {postsQuery.isSuccess &&
         postsQuery.data.map(({ id, htmlContent, postComments, user }) => (
-          <>
+          <div key={id}>
             <Card
               sx={{
                 position: 'relative',
@@ -135,7 +135,7 @@ const Home: React.FC = () => {
                 Votre post a bien été publié!
               </Alert>
             </Snackbar>
-          </>
+          </div>
         ))}
     </>
   );
