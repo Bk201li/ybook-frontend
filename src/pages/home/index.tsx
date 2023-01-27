@@ -16,20 +16,27 @@ import { useAtom } from 'jotai';
 import { Box, ListItem, ListItemAvatar, ListItemText, TextField, Snackbar } from '@mui/material';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import { createPostComment } from '~/store/api/services/post-comments';
+import { createPostLike } from '~/store/api/services/post-likes';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 const Home: React.FC = () => {
-  const queryClient = useQueryClient();
-  const postsQuery = useQuery({ queryKey: ['posts'], queryFn: getPosts });
   const [snackbar, setSnackbar] = useAtom(snackBar);
   const [isPostLiked, setIsPostLiked] = useState<null | number>(null);
   const [isCommentOpen, setIsCommentOpen] = useState<null | number>(null);
   const [showMore, setShowMore] = useState(false);
+  const queryClient = useQueryClient();
+  const postsQuery = useQuery({ queryKey: ['posts'], queryFn: getPosts });
   const postCommentMutation = useMutation({
     mutationFn: createPostComment,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['posts'] });
+    },
+  });
+  const postLikeMutation = useMutation({
+    mutationFn: createPostLike,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['posts'] });
     },
@@ -59,9 +66,11 @@ const Home: React.FC = () => {
       }
       return postId;
     });
+
+    postLikeMutation.mutate({ postId });
   };
 
-  const submitComment = (event: React.FormEvent<HTMLFormElement>, id: number) => {
+  const submitComment = (event: React.FormEvent<HTMLFormElement>, postId: number) => {
     event.preventDefault();
     event.persist();
     const data = new FormData(event.currentTarget);
@@ -70,7 +79,7 @@ const Home: React.FC = () => {
       Value: data.get('commentary') as string,
     };
 
-    postCommentMutation.mutate({ postId: id, text: commentary.Value });
+    postCommentMutation.mutate({ postId, text: commentary.Value });
   };
 
   return (
