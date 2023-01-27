@@ -6,5 +6,5 @@ export function getPosts() {
 }
 
 export function createPost({ htmlContent }: { htmlContent: string }) {
-  return axios.post<IPost[]>('/users/1/posts', { htmlContent }).then((res) => res.data);
+  return axios.post<IPost>('/users/1/posts', { htmlContent }).then((res) => res.data);
 }

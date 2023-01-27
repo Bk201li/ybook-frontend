@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -15,17 +15,25 @@ import { snackBar } from '~/store/atoms/snackBar';
 import { useAtom } from 'jotai';
 import { Box, ListItem, ListItemAvatar, ListItemText, TextField, Snackbar } from '@mui/material';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import { createPostComment } from '~/store/api/services/post-comments';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 const Home: React.FC = () => {
+  const queryClient = useQueryClient();
   const postsQuery = useQuery({ queryKey: ['posts'], queryFn: getPosts });
   const [snackbar, setSnackbar] = useAtom(snackBar);
-  const [isCommentOpen, setIsCommentOpen] = useState<null | number>(null);
   const [isPostLiked, setIsPostLiked] = useState<null | number>(null);
+  const [isCommentOpen, setIsCommentOpen] = useState<null | number>(null);
   const [showMore, setShowMore] = useState(false);
+  const postCommentMutation = useMutation({
+    mutationFn: createPostComment,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['posts'] });
+    },
+  });
 
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
@@ -51,6 +59,18 @@ const Home: React.FC = () => {
       }
       return postId;
     });
+  };
+
+  const submitComment = (event: React.FormEvent<HTMLFormElement>, id: number) => {
+    event.preventDefault();
+    event.persist();
+    const data = new FormData(event.currentTarget);
+    const commentary = {
+      Name: 'commentary',
+      Value: data.get('commentary') as string,
+    };
+
+    postCommentMutation.mutate({ postId: id, text: commentary.Value });
   };
 
   return (
@@ -110,6 +130,9 @@ const Home: React.FC = () => {
               {isCommentOpen === id && (
                 <>
                   <Box
+                    component="form"
+                    noValidate
+                    onSubmit={(e) => submitComment(e, id)}
                     sx={{
                       display: 'flex',
                       alignItems: 'flex-end',
@@ -120,6 +143,10 @@ const Home: React.FC = () => {
                   >
                     {/* <Avatar alt="profil" src={avatar} /> */}
                     <TextField
+                      autoComplete="commentary"
+                      name="commentary"
+                      id="commentary"
+                      label="Commentaire"
                       sx={{ pl: '15px' }}
                       placeholder="Écrivez votre réponse"
                       variant="standard"
