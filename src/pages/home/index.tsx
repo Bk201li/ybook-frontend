@@ -106,10 +106,13 @@ const Home: React.FC = () => {
             /> */}
               <CardActions className="flex justify-left">
                 <IconButton>
-                  <LikeButton />
+                  <ThumbUpIcon sx={{ width: "30px", ml: "10" }} />
                 </IconButton>
-                <IconButton onClick={() => handleCommentOpen(id)}>
-                  <ModeCommentRoundedIcon sx={{ width: "30px", pl: "10px" }} />
+                <IconButton
+                  sx={{ outline: "0" }}
+                  onClick={() => handleCommentOpen(id)}
+                >
+                  <ModeCommentRoundedIcon sx={{ width: "30px", ml: "10" }} />
                 </IconButton>
               </CardActions>
               {isCommentOpen === id && (
