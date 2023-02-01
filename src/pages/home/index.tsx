@@ -84,6 +84,7 @@ const Home: React.FC = () => {
 
   return (
     <>
+      {console.log('posts', postsQuery.data)}
       {postsQuery.isSuccess &&
         postsQuery.data.map(({ id, htmlContent, postLikes, postComments, user }) => (
           <div key={id}>
