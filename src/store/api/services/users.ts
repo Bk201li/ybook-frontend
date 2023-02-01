@@ -2,8 +2,8 @@ import axios from 'axios';
 import { axiosInstance } from '../axios';
 import IUser from '~/types/user.type';
 
-export function getUsers() {
-  return axios.get<IUser[]>('/users').then((res) => res.data);
+export function getUser() {
+  return axios.get<IUser>('/users/1').then((res) => res.data);
 }
 
 export function createUser({
@@ -20,17 +20,16 @@ export function createUser({
     .then((res) => res.data);
 }
 
-
 export function editUser({
   email,
   firstname,
   lastname,
 }: {
-  email: string;
-  firstname: string;
-  lastname: string;
+  email?: string;
+  firstname?: string;
+  lastname?: string;
 }) {
   return axios
-    .post<IUser[]>('http://localhost:3000/users/', { email, firstname, lastname })
+    .patch<IUser[]>('/users/1', { email, firstname, lastname })
     .then((res) => res.data);
 }
