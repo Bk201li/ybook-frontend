@@ -170,7 +170,25 @@ const Friends: React.FC = () => {
                 alt=""
               />
 
-              <p className="ml-2">Ali Chamass</p>
+              <p className="ml-2">Etienne Bachelard</p>
+            </div>
+
+            <div>
+              {/* <AddCircleRoundedIcon className="mr-1" color="success"></AddCircleRoundedIcon> */}
+              <DoNotDisturbOnRoundedIcon sx={{ color: red[500] }}></DoNotDisturbOnRoundedIcon>
+            </div>
+          </div>
+        </TabPanel>
+        <TabPanel value={1} sx={{ opacity: 1 }}>
+        <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <img
+                className="w-10 h-10 rounded-full"
+                src="https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc="
+                alt=""
+              />
+
+              <p className="ml-2">Clément Llorens</p>
             </div>
 
             <div>
@@ -179,8 +197,7 @@ const Friends: React.FC = () => {
             </div>
           </div>
         </TabPanel>
-        <TabPanel value={1}>Profile page</TabPanel>
-        <TabPanel value={2}>Language page</TabPanel>
+        <TabPanel value={2}>Amis suggérés</TabPanel>
       </TabsUnstyled>
     </>
   );
