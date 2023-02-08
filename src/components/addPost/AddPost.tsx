@@ -49,7 +49,7 @@ const AddPost: React.FC<Props> = ({ handleClose, open }) => {
               alt=""
             />
 
-            <p className="ml-2">*user name*</p>
+            <p className="ml-2">Ali Chamass</p>
           </div>
         </div>
         <Box component="form" noValidate onSubmit={addPost}>
