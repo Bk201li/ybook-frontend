@@ -168,7 +168,7 @@ const Post = ({ post }: { post: IPost }) => {
           </IconButton>
           {
             <Typography>
-              {postCommentsQuery.isSuccess && postCommentsQuery.data.length}
+              {post.postComments.length}
             </Typography>
           }
         </div>
