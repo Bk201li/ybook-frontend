@@ -6,6 +6,10 @@ export function getUser() {
   return axios.get<IUser>('/users/1').then((res) => res.data);
 }
 
+export function getUsers() {
+  return axios.get<IUser[]>('/users').then((res) => res.data);
+}
+
 export function createUser({
   email,
   firstname,
@@ -29,7 +33,5 @@ export function editUser({
   firstname?: string;
   lastname?: string;
 }) {
-  return axios
-    .patch<IUser[]>('/users/1', { email, firstname, lastname })
-    .then((res) => res.data);
+  return axios.patch<IUser[]>('/users/1', { email, firstname, lastname }).then((res) => res.data);
 }

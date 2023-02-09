@@ -10,6 +10,11 @@ import DoNotDisturbOnRoundedIcon from '@mui/icons-material/DoNotDisturbOnRounded
 import { red } from '@mui/material/colors';
 import InputUnstyled from '@mui/base/InputUnstyled';
 import SearchIcon from '@mui/icons-material/Search';
+import { useQuery } from '@tanstack/react-query';
+import { getUsers } from '~/store/api/services/users';
+import UsersList from '~/components/usersList/UsersList';
+import FriendsList from '~/components/friendsList/FriendsList';
+import { getFriendships } from '~/store/api/services/friendships';
 
 const StyledInputElement = styled('input')(
   ({ theme }) => `
@@ -135,7 +140,23 @@ const CustomInput = React.forwardRef(function CustomInput(
   return <InputUnstyled slots={{ input: StyledInputElement }} {...props} ref={ref} />;
 });
 
+export enum friendshipStatus {
+  PENDING = 'PENDING',
+  ACCEPTED = 'ACCEPTED',
+  IGNORED = 'IGNORED',
+}
+
 const Friends: React.FC = () => {
+  const getUsersQuery = useQuery({
+    queryKey: ['users'],
+    queryFn: getUsers,
+  });
+
+  const getFriendshipsQuery = useQuery({
+    queryKey: ['friendships'],
+    queryFn: getFriendships,
+  });
+
   return (
     <>
       <div className="flex items-center flex-col mb-20">
@@ -162,42 +183,21 @@ const Friends: React.FC = () => {
         </TabsList>
 
         <TabPanel value={0} sx={{ opacity: 1 }}>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <img
-                className="w-10 h-10 rounded-full"
-                src="https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc="
-                alt=""
-              />
-
-              <p className="ml-2">Etienne Bachelard</p>
-            </div>
-
-            <div>
-              {/* <AddCircleRoundedIcon className="mr-1" color="success"></AddCircleRoundedIcon> */}
-              <DoNotDisturbOnRoundedIcon sx={{ color: red[500] }}></DoNotDisturbOnRoundedIcon>
-            </div>
-          </div>
+          {getFriendshipsQuery.isSuccess && (
+            <FriendsList
+              friendships={getFriendshipsQuery.data}
+              status={friendshipStatus.ACCEPTED}
+            />
+          )}
         </TabPanel>
         <TabPanel value={1} sx={{ opacity: 1 }}>
-        <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <img
-                className="w-10 h-10 rounded-full"
-                src="https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc="
-                alt=""
-              />
-
-              <p className="ml-2">Clément Llorens</p>
-            </div>
-
-            <div>
-              <AddCircleRoundedIcon className="mr-1" color="success"></AddCircleRoundedIcon>
-              <DoNotDisturbOnRoundedIcon sx={{ color: red[500] }}></DoNotDisturbOnRoundedIcon>
-            </div>
-          </div>
+          {getFriendshipsQuery.isSuccess && (
+            <FriendsList friendships={getFriendshipsQuery.data} status={friendshipStatus.PENDING} />
+          )}
         </TabPanel>
-        <TabPanel value={2}>Amis suggérés</TabPanel>
+        <TabPanel value={2}>
+          {getUsersQuery.isSuccess && <UsersList users={getUsersQuery.data} />}
+        </TabPanel>
       </TabsUnstyled>
     </>
   );
