@@ -32,10 +32,9 @@ Uniquement en statique (Fonctionnalité non faite)
 
 
 ## ENV
+AWS KEYS : SEE MOODLE
 
 ```
-VITE_USER_POOL_ID=eu-west-3_Iekd8jDeb
-VITE_CLIENT_ID=7llslfb09dtag2h7117og3ku72
 VITE_API_BASE_URL=http://localhost:3000
 ```
 
