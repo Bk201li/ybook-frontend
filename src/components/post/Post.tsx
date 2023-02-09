@@ -103,6 +103,12 @@ const Post = ({ post }: { post: IPost }) => {
     postCommentsQuery.refetch();
   }, [limit]);
 
+  const postDate = new Date(post.createdAt).toLocaleDateString("fr-FR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+
   return (
     <Card
       sx={{
@@ -125,6 +131,13 @@ const Post = ({ post }: { post: IPost }) => {
           justifyContent: "start",
         }}
         title={`${post.user.firstname} ${post.user.lastname}`}
+        subheader={
+          <Typography
+            sx={{ display: "flex", fontSize: "0.9em", color: "grey" }}
+          >
+            {postDate}
+          </Typography>
+        }
         sx={{ pb: "10px" }}
       />
       <CardContent sx={{ pt: "1px" }}>
@@ -202,15 +215,16 @@ const Post = ({ post }: { post: IPost }) => {
           </ListItemAvatar> */}
                   <ListItemText
                     primary={
-                      <>
-                        {user.firstname} {user.lastname}
-                      </>
+                      <div className="flex justify-between">
+                        <Typography>
+                          {user.firstname} {user.lastname}
+                        </Typography>
+                        <Typography sx={{ fontSize: "0.8em", color: "grey" }}>
+                          {commentDate}
+                        </Typography>
+                      </div>
                     }
-                    secondary={
-                      <>
-                        {commentDate} - {text}
-                      </>
-                    }
+                    secondary={text}
                   />
                   {/* <ListItemText primary={user.firstname} secondary={text} /> */}
                 </ListItem>
